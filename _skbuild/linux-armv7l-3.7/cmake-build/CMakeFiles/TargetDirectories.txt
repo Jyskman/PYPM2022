@@ -1,0 +1,13 @@
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/CMakeFiles/install/local.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/CMakeFiles/install.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/CMakeFiles/install/strip.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/CMakeFiles/edit_cache.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/CMakeFiles/list_install_components.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/CMakeFiles/rebuild_cache.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/pypm2/CMakeFiles/install/strip.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/pypm2/CMakeFiles/edit_cache.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/pypm2/CMakeFiles/rebuild_cache.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/pypm2/CMakeFiles/list_install_components.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/pypm2/CMakeFiles/install.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/pypm2/CMakeFiles/_pypm2.dir
+/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/pypm2/CMakeFiles/install/local.dir

@@ -1,0 +1,11 @@
+setup.py
+_skbuild/linux-armv7l-3.7/cmake-install/pypmModule.py
+_skbuild/linux-armv7l-3.7/cmake-install/pypm2/__init__.py
+_skbuild/linux-armv7l-3.7/cmake-install/pypm2/__main__.py
+_skbuild/linux-armv7l-3.7/cmake-install/pypm2/_pypm2.cpython-37m-arm-linux-gnueabihf.so
+_skbuild/linux-armv7l-3.7/cmake-install/pypm2/world.py
+pypm2.egg-info/PKG-INFO
+pypm2.egg-info/SOURCES.txt
+pypm2.egg-info/dependency_links.txt
+pypm2.egg-info/not-zip-safe
+pypm2.egg-info/top_level.txt

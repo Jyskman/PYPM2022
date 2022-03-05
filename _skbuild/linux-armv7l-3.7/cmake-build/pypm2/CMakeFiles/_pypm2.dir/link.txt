@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG -Wl,--unresolved-symbols=ignore-all -Wl,--version-script="/home/pi/Documents/Projects/PYPM_Python3_v2/_skbuild/linux-armv7l-3.7/cmake-build/pypm2/CMakeFiles/_pypm2-version-script.map" -shared  -o _pypm2.cpython-37m-arm-linux-gnueabihf.so CMakeFiles/_pypm2.dir/_pypm2.cxx.o CMakeFiles/_pypm2.dir/test.cxx.o CMakeFiles/_pypm2.dir/PY_PM.cxx.o 
