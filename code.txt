@@ -1,0 +1,45 @@
+from matplotlib import animation
+
+import matplotlib.pyplot as plt
+import time
+import matplotlib.animation as animation 
+from pypm2 import _pypm2 as p
+
+
+# from matplotlib.animation import FuncAnimation
+
+# import seaborn as sns
+
+
+a = p.OPC_create()
+p.ISS_config(a)
+
+time.sleep(1)
+
+p.OPC_fan_off(a)
+time.sleep(10)
+p.OPC_fan_off(a)
+time.sleep(1)
+p.OPC_fan_on(a)
+
+
+fig = plt.figure()
+ax1 = fig.add_subplot(1,1,1)
+
+size = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24']
+dist = []
+
+def animate(i):
+    
+    dist = p.OPC_return_dist(a)  
+    ax1.clear()
+#     ax1.plot(x[i],y[i])
+    ax1.bar(size,dist)
+
+ani = animation.FuncAnimation(fig,animate,interval=1000)
+plt.show()
+
+
+
+
+
