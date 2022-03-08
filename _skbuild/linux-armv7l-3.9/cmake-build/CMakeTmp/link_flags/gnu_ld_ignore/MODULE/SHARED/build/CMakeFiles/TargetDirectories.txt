@@ -1,0 +1,5 @@
+/home/pi/Documents/PYPM2022/_skbuild/linux-armv7l-3.9/cmake-build/CMakeTmp/link_flags/gnu_ld_ignore/MODULE/SHARED/build/CMakeFiles/number.dir
+/home/pi/Documents/PYPM2022/_skbuild/linux-armv7l-3.9/cmake-build/CMakeTmp/link_flags/gnu_ld_ignore/MODULE/SHARED/build/CMakeFiles/counter.dir
+/home/pi/Documents/PYPM2022/_skbuild/linux-armv7l-3.9/cmake-build/CMakeTmp/link_flags/gnu_ld_ignore/MODULE/SHARED/build/CMakeFiles/main.dir
+/home/pi/Documents/PYPM2022/_skbuild/linux-armv7l-3.9/cmake-build/CMakeTmp/link_flags/gnu_ld_ignore/MODULE/SHARED/build/CMakeFiles/edit_cache.dir
+/home/pi/Documents/PYPM2022/_skbuild/linux-armv7l-3.9/cmake-build/CMakeTmp/link_flags/gnu_ld_ignore/MODULE/SHARED/build/CMakeFiles/rebuild_cache.dir

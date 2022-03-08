@@ -1,0 +1,1 @@
+{"args": ["/usr/local/bin/cmake", "-DCMAKE_BUILD_TYPE:STRING=Release"], "version": "3.22.2", "environment": {"PYTHONNOUSERSITE": null, "PYTHONPATH": null}}
