@@ -361,11 +361,11 @@ static PyObject *OPC_return_dist(PyObject *self, PyObject *args) {
     float ml = ( (float)local->OPC_struct_histogram.samplingPeriod * (float)local->OPC_struct_histogram.sampleFlowRate)/10000.0 ;
    
    
-    PySys_WriteStdout("ml, %f! :)\n", ml);
-    PySys_WriteStdout("sampling period int , %d! :)\n", local->OPC_struct_histogram.samplingPeriod/100);
-    PySys_WriteStdout("sampling flow rate int , %d! :)\n", local->OPC_struct_histogram.sampleFlowRate/100);
-    PySys_WriteStdout("sampling period float , %f! :)\n", (float)local->OPC_struct_histogram.samplingPeriod/100.0);
-    PySys_WriteStdout("sampling flow rate float , %f! :)\n", (float)local->OPC_struct_histogram.sampleFlowRate/100.0);
+    //PySys_WriteStdout("ml, %f! :)\n", ml);
+    //PySys_WriteStdout("sampling period int , %d! :)\n", local->OPC_struct_histogram.samplingPeriod/100);
+    //PySys_WriteStdout("sampling flow rate int , %d! :)\n", local->OPC_struct_histogram.sampleFlowRate/100);
+    //PySys_WriteStdout("sampling period float , %f! :)\n", (float)local->OPC_struct_histogram.samplingPeriod/100.0);
+    //PySys_WriteStdout("sampling flow rate float , %f! :)\n", (float)local->OPC_struct_histogram.sampleFlowRate/100.0);
    
    
     for ( int i = 0; i < 24; i++ ) {
@@ -415,8 +415,81 @@ static PyObject *pickup(PyObject *self, PyObject *args) {
 
 
 
+// read configuration variables
+static PyObject *OPC_return_bounds(PyObject *self, PyObject *args) {
+  
+    PyObject * pf = NULL;
+        
+    if(!PyArg_UnpackTuple(args, "iss", 1, 1, &pf)) return NULL;
+
+    OPC * local = (OPC*)PyCapsule_GetPointer(pf, "opcptr") ;
 
 
+    local->OPC_read_config();
+
+
+    //int bin_bounds[50];
+
+    
+    //bin_bounds[0] = (float)local->OPC_struct_config_variables.binBoundriesADC0;
+    //bin_bounds[1] = (float)local->OPC_struct_config_variables.binBoundriesADC1;
+    //bin_bounds[2] = (float)local->OPC_struct_config_variables.binBoundriesADC2;
+    //bin_bounds[3] = (float)local->OPC_struct_config_variables.binBoundriesADC3;
+    //bin_bounds[4] = (float)local->OPC_struct_config_variables.binBoundriesADC4;
+    //bin_bounds[5] = (float)local->OPC_struct_config_variables.binBoundriesADC5;
+    //bin_bounds[6] = (float)local->OPC_struct_config_variables.binBoundriesADC6;
+    //bin_bounds[7] = (float)local->OPC_struct_config_variables.binBoundriesADC7;
+    //bin_bounds[8] = (float)local->OPC_struct_config_variables.binBoundriesADC8;
+    //bin_bounds[9] = (float)local->OPC_struct_config_variables.binBoundriesADC9;
+    //bin_bounds[10] = (float)local->OPC_struct_config_variables.binBoundriesADC10;
+    //bin_bounds[11] = (float)local->OPC_struct_config_variables.binBoundriesADC11;
+    //bin_bounds[12] = (float)local->OPC_struct_config_variables.binBoundriesADC12;
+    //bin_bounds[13] = (float)local->OPC_struct_config_variables.binBoundriesADC13;
+    //bin_bounds[14] = (float)local->OPC_struct_config_variables.binBoundriesADC14;
+    //bin_bounds[15] = (float)local->OPC_struct_config_variables.binBoundriesADC15;
+    //bin_bounds[16] = (float)local->OPC_struct_config_variables.binBoundriesADC16;
+    //bin_bounds[17] = (float)local->OPC_struct_config_variables.binBoundriesADC17;
+    //bin_bounds[18] = (float)local->OPC_struct_config_variables.binBoundriesADC18;
+    //bin_bounds[19] = (float)local->OPC_struct_config_variables.binBoundriesADC19;
+    //bin_bounds[20] = (float)local->OPC_struct_config_variables.binBoundriesADC20;
+    //bin_bounds[21] = (float)local->OPC_struct_config_variables.binBoundriesADC21;
+    //bin_bounds[22] = (float)local->OPC_struct_config_variables.binBoundriesADC22;
+    //bin_bounds[23] = (float)local->OPC_struct_config_variables.binBoundriesADC23;
+    //bin_bounds[24] = (float)local->OPC_struct_config_variables.binBoundriesADC24;    
+
+//// Part 2
+
+    //bin_bounds[25] = (float)local->OPC_struct_config_variables.binBoundriesDiametor0;
+    //bin_bounds[26] = (float)local->OPC_struct_config_variables.binBoundriesDiametor1;
+    //bin_bounds[27] = (float)local->OPC_struct_config_variables.binBoundriesDiametor2;
+    //bin_bounds[28] = (float)local->OPC_struct_config_variables.binBoundriesDiametor3;
+    //bin_bounds[29] = (float)local->OPC_struct_config_variables.binBoundriesDiametor4;
+    //bin_bounds[30] = (float)local->OPC_struct_config_variables.binBoundriesDiametor5;
+    //bin_bounds[31] = (float)local->OPC_struct_config_variables.binBoundriesDiametor6;
+    //bin_bounds[32] = (float)local->OPC_struct_config_variables.binBoundriesDiametor7;
+    //bin_bounds[33] = (float)local->OPC_struct_config_variables.binBoundriesDiametor8;
+    //bin_bounds[34] = (float)local->OPC_struct_config_variables.binBoundriesDiametor9;
+    //bin_bounds[35] = (float)local->OPC_struct_config_variables.binBoundriesDiametor10;
+    //bin_bounds[36] = (float)local->OPC_struct_config_variables.binBoundriesDiametor11;
+    //bin_bounds[37] = (float)local->OPC_struct_config_variables.binBoundriesDiametor12;
+    //bin_bounds[38] = (float)local->OPC_struct_config_variables.binBoundriesDiametor13;
+    //bin_bounds[39] = (float)local->OPC_struct_config_variables.binBoundriesDiametor14;
+    //bin_bounds[40] = (float)local->OPC_struct_config_variables.binBoundriesDiametor15;
+    //bin_bounds[41] = (float)local->OPC_struct_config_variables.binBoundriesDiametor16;
+    //bin_bounds[42] = (float)local->OPC_struct_config_variables.binBoundriesDiametor17;
+    //bin_bounds[43] = (float)local->OPC_struct_config_variables.binBoundriesDiametor18;
+    //bin_bounds[44] = (float)local->OPC_struct_config_variables.binBoundriesDiametor19;
+    //bin_bounds[45] = (float)local->OPC_struct_config_variables.binBoundriesDiametor20;
+    //bin_bounds[46] = (float)local->OPC_struct_config_variables.binBoundriesDiametor21;
+    //bin_bounds[47] = (float)local->OPC_struct_config_variables.binBoundriesDiametor22;
+    //bin_bounds[48] = (float)local->OPC_struct_config_variables.binBoundriesDiametor23;
+    //bin_bounds[49] = (float)local->OPC_struct_config_variables.binBoundriesDiametor24;  
+
+
+    //return ret;
+    
+    Py_RETURN_NONE;
+};
 
 //-----------------------------------------------------------------------------
 //~ static PyObject *elevation_example(PyObject *self, PyObject *args)
@@ -501,6 +574,13 @@ static PyMethodDef pypm_methods[] = {
     METH_VARARGS,
     "ISS"
   },
+ 
+    {
+    "OPC_return_bounds",
+    OPC_return_bounds,
+    METH_VARARGS,
+    "ISS"
+  },  
   
   {NULL, NULL, 0, NULL}        /* Sentinel */
 };

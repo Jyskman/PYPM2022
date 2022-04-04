@@ -328,7 +328,7 @@ void OPC::OPC_read_histogram() {
 	
 	write(serial_port, send_command, 2);
 	read_bytes = read(serial_port, &read_buf, sizeof(read_buf));
-	printf("Bytes read %i \n", read_bytes);
+	//~ printf("Bytes read %i \n", read_bytes);
 	usleep(10000);
 	
 	write(serial_port, send_command_1, 63);
@@ -339,7 +339,7 @@ void OPC::OPC_read_histogram() {
 	
 	memset(&read_buf, '\0', sizeof(read_buf));
 	read_bytes = read(serial_port, &read_buf, sizeof(read_buf));
-	printf("Bytes read %i \n", read_bytes);
+	//~ printf("Bytes read %i \n", read_bytes);
 	
 	// Create an array where data is copied from the read_buf. It is to avoid the FF etc bytes
 	char data_in[86];
@@ -395,53 +395,53 @@ void OPC::OPC_read_histogram() {
 	 printf(" %i ",OPC_struct_histogram.binCount23);
 
 	printf("  \n -------------------------------------------------");
-	printf("  \n Time To Cross");
-	 printf(" %i ",OPC_struct_histogram.bin1TimeToCross);
-	 printf(" %i ",OPC_struct_histogram.bin3TimeToCross);
-	 printf(" %i ",OPC_struct_histogram.bin5TimeToCross);
-	 printf(" %i ",OPC_struct_histogram.bin7TimeToCross);
+	//printf("  \n Time To Cross");
+	 //printf(" %i ",OPC_struct_histogram.bin1TimeToCross);
+	 //printf(" %i ",OPC_struct_histogram.bin3TimeToCross);
+	 //printf(" %i ",OPC_struct_histogram.bin5TimeToCross);
+	 //printf(" %i ",OPC_struct_histogram.bin7TimeToCross);
 
-	 printf("  \n -------------------------------------------------");
-	 printf("  \n Sampling Period");
-	 printf(" %i \n ",OPC_struct_histogram.samplingPeriod);
-	 printf("  \n -------------------------------------------------");
-	 printf("  \n Sample Flow Rate");
-	 printf(" %i \n ",OPC_struct_histogram.sampleFlowRate);
-	 printf("  \n -------------------------------------------------");
-	 printf("  \n Temperature");
-	 printf(" %i \n ",OPC_struct_histogram.temperature );
-	 printf("  \n -------------------------------------------------");
-	 printf("  \n Humidity");
-	 printf(" %i \n ",OPC_struct_histogram.humidity );
-	 printf("  \n -------------------------------------------------");
-	 printf("  \n pm1");
-	 printf(" %f \n ",OPC_struct_histogram.pm1);
-	 printf("  \n -------------------------------------------------");
-	 printf("  \n pm2.5");
-	 printf(" %f \n ",OPC_struct_histogram.pm2_5);
-	 printf("  \n -------------------------------------------------");
-	 printf("  \n pm10");
-	 printf(" %f \n ",OPC_struct_histogram.pm10);
-	 printf("  \n -------------------------------------------------");
+	 //printf("  \n -------------------------------------------------");
+	 //printf("  \n Sampling Period");
+	 //printf(" %i \n ",OPC_struct_histogram.samplingPeriod);
+	 //printf("  \n -------------------------------------------------");
+	 //printf("  \n Sample Flow Rate");
+	 //printf(" %i \n ",OPC_struct_histogram.sampleFlowRate);
+	 //printf("  \n -------------------------------------------------");
+	 //printf("  \n Temperature");
+	 //printf(" %i \n ",OPC_struct_histogram.temperature );
+	 //printf("  \n -------------------------------------------------");
+	 //printf("  \n Humidity");
+	 //printf(" %i \n ",OPC_struct_histogram.humidity );
+	 //printf("  \n -------------------------------------------------");
+	 //printf("  \n pm1");
+	 //printf(" %f \n ",OPC_struct_histogram.pm1);
+	 //printf("  \n -------------------------------------------------");
+	 //printf("  \n pm2.5");
+	 //printf(" %f \n ",OPC_struct_histogram.pm2_5);
+	 //printf("  \n -------------------------------------------------");
+	 //printf("  \n pm10");
+	 //printf(" %f \n ",OPC_struct_histogram.pm10);
+	 //printf("  \n -------------------------------------------------");
 
-	printf("  \n -------------------------------------------------");
-	printf("  \n MSLNS");
+	//printf("  \n -------------------------------------------------");
+	//printf("  \n MSLNS");
 
-	printf(" %i ",OPC_struct_histogram.rejectCountGlitch);
-	printf(" %i ",OPC_struct_histogram.rejectCountLongTOF);
-	printf(" %i ",OPC_struct_histogram.rejectCountRatio);
-	printf(" %i ",OPC_struct_histogram.rejectCountOutOfRange);
-	printf(" %i ",OPC_struct_histogram.fanRevCount);
-	printf(" %i ",OPC_struct_histogram.laserStatus);
-	printf(" %i ",OPC_struct_histogram.checkSum);
+	//printf(" %i ",OPC_struct_histogram.rejectCountGlitch);
+	//printf(" %i ",OPC_struct_histogram.rejectCountLongTOF);
+	//printf(" %i ",OPC_struct_histogram.rejectCountRatio);
+	//printf(" %i ",OPC_struct_histogram.rejectCountOutOfRange);
+	//printf(" %i ",OPC_struct_histogram.fanRevCount);
+	//printf(" %i ",OPC_struct_histogram.laserStatus);
+	//printf(" %i ",OPC_struct_histogram.checkSum);
 	
-	 printf("  \n -------------------------------------------------");
-	 printf("  \n Temperature");
-	 printf(" %i \n ",OPC_struct_histogram.temperature_calc );
-	 printf("  \n -------------------------------------------------");
-	 printf("  \n Humidity");
-	 printf(" %i \n ",OPC_struct_histogram.humidity_calc );
-	 printf("  \n -------------------------------------------------");
+	 //printf("  \n -------------------------------------------------");
+	 //printf("  \n Temperature");
+	 //printf(" %i \n ",OPC_struct_histogram.temperature_calc );
+	 //printf("  \n -------------------------------------------------");
+	 //printf("  \n Humidity");
+	 //printf(" %i \n ",OPC_struct_histogram.humidity_calc );
+	 //printf("  \n -------------------------------------------------");
 	
 	
 };
