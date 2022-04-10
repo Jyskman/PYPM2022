@@ -394,7 +394,7 @@ void OPC::OPC_read_histogram() {
 	 printf(" %i ",OPC_struct_histogram.binCount22);
 	 printf(" %i ",OPC_struct_histogram.binCount23);
 
-	printf("  \n -------------------------------------------------");
+	printf("  \n ------------------jysk---------------");
 	//printf("  \n Time To Cross");
 	 //printf(" %i ",OPC_struct_histogram.bin1TimeToCross);
 	 //printf(" %i ",OPC_struct_histogram.bin3TimeToCross);
