@@ -1,4 +1,6 @@
 from matplotlib import animation
+import sys
+sys.path.remove('/home/pi/Documents/PYPM2022')
 
 import matplotlib.pyplot as plt
 import time
@@ -186,5 +188,6 @@ time.sleep(1)
 size_mid, size_width, size_list = size_width(a)
 LCD, image, draw = LCD_config()
 
-
+# /home/pi/Documents
 # exec(open("test_3.py").read())
+# exec(open('/home/pi/Documents/test_3.py').read())

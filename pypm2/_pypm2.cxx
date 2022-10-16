@@ -77,7 +77,7 @@ static PyObject *hello_example(PyObject *self, PyObject *args)
     return NULL;
 
   // Print message and return None
-  PySys_WriteStdout("Hello Jysk, %s! :)\n", strArg);
+  PySys_WriteStdout("Hello Jyskk, %s! :)\n", strArg);
   Py_RETURN_NONE;
 }
 
