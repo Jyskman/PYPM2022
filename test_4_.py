@@ -10,6 +10,7 @@ iterator = 0
 operation = True
 Reset = False
 lock = threading.Lock()
+shutdown = False
 
 path = "/home/pi/Documents/PYPM2022/testdata/"
 file = "test.csv"
@@ -23,6 +24,7 @@ def LCD_animate(LCD, draw, image, a):
     global Reset
     global iterator
     global operation
+    global shutdown
     
     run = 30
     x_base = 27
@@ -73,7 +75,7 @@ def LCD_animate(LCD, draw, image, a):
                 if x_state < 0:
                     x_state = 3
             if GPIO.input(KEY1_PIN) == 1 & latch == False:
-                operation = False
+                shutdown = True
 
         y_max = y_range[y_state]
         dist = p.OPC_return_dist(a)
@@ -220,12 +222,13 @@ def report_data():
     global lock
     global x
     global Reset
+    global shutdown
     latch = False
     first = True
     
     while operation == True:
 #         print("iterator:",iterator)
-        if ( iterator == 10 and latch == False ) or operation == False:
+        if ( iterator == 10 and latch == False ) or (shutdown == True and latch == False):
             lock.acquire()
             print("mark:",data)
             latch = True
@@ -252,6 +255,8 @@ def report_data():
 
             Reset = True
             first = False
+            if shutdown == True:
+                operation = False
             lock.release()
             
         if iterator != 10 and latch == True:
