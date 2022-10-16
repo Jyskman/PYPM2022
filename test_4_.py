@@ -14,6 +14,7 @@ shutdown = False
 
 path = "/home/pi/Documents/PYPM2022/testdata/"
 file = "test.csv"
+test = 0
 
 
 def LCD_animate(LCD, draw, image, a):
