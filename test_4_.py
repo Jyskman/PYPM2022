@@ -15,9 +15,12 @@ shutdown = False
 switch = False
 dist_list = []
 current_time =[]
+pause = False
+
+
 
 path = "/home/pi/Documents/PYPM2022/testdata/"
-file = "test.csv"
+file = "Start_"
 test = 0
 
 
@@ -32,6 +35,8 @@ def LCD_animate(LCD, draw, image, a):
     global shutdown
     global switch 
     global dist_list
+    global pause
+    global first
     
     run = 30
     x_base = 27
@@ -71,8 +76,11 @@ def LCD_animate(LCD, draw, image, a):
     #                 y_max = 40
                 if GPIO.input(KEY3_PIN) == 0 & latch == False:
                     latch = True
+                    pause = True
+#                     draw.text( (64,(64)),"PAUSE", fill = "RED",font=font )
+#                     LCD.LCD_ShowImage(image,0,0)
     #                 y_max = 10
-                    y_state = y_state - 1
+#                     y_state = y_state - 1
                 if GPIO.input(KEY_LEFT_PIN) == 1 & latch == False:
                     latch = True
                     x_state = x_state + 1
@@ -85,6 +93,13 @@ def LCD_animate(LCD, draw, image, a):
                         x_state = 3
                 if GPIO.input(KEY1_PIN) == 1 & latch == False:
                     shutdown = True
+                if GPIO.input(KEY2_PIN) == 1 & latch == False:
+                    first = True
+                    iterator = 10
+                    draw.text( (64,(64)),"NEW FILE", fill = "RED",font=font )
+                    LCD.LCD_ShowImage(image,0,0)
+                    time.sleep(1)
+                    
 
             y_max = y_range[y_state]
             dist = p.OPC_return_dist(a)
@@ -95,7 +110,7 @@ def LCD_animate(LCD, draw, image, a):
                 data_np = dist_.copy()
                 dist_copy = dist.copy()
                 dist_copy = dist_copy.tolist()
-                dist_copy.insert(0, datetime.datetime.now() )
+                dist_copy.insert(0, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') )
                 dist_list = []
                 dist_list.append(dist_copy)
                 
@@ -105,7 +120,7 @@ def LCD_animate(LCD, draw, image, a):
                 data_np = np.vstack([data_np, dist_])
                 dist_copy = dist.copy()
                 dist_copy = dist_copy.tolist()
-                dist_copy.insert(0, datetime.datetime.now() )
+                dist_copy.insert(0, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') )
                 dist_list.append(dist_copy)
                 
             lock.release()
@@ -195,7 +210,11 @@ def LCD_animate(LCD, draw, image, a):
                     y_val = dist[x] / (0.01*y_max)
                     draw.line([((x_correction+x+x_base+x*x_max_factor),(128)-y_base),((x_correction+x+x_base)+x*x_max_factor,(128-y_val)-y_base)], fill = "BLUE",width = 1)
                     draw.line([((x_correction+x+x_base+x*x_max_factor+1),(128)-y_base),((x_correction+x+x_base)+x*x_max_factor+1,(128-y_val)-y_base)], fill = "BLUE",width = 1*bar_factor)
-                    
+            
+            
+            if pause == True:
+                draw.text( (64,(64)),"PAUSE", fill = "RED",font=font )
+
             LCD.LCD_ShowImage(image,0,0)
     print('Collect clear')
     operation = False
@@ -272,35 +291,40 @@ def report_data_list():
     global Reset
     global shutdown
     global dist_list
+    global pause
     latch = False
+    global first
     first = True
     
     while operation == True:
 #         print("iterator:",iterator)
         if ( iterator == 10 and latch == False ) or (shutdown == True and latch == False):
             lock.acquire()
+            dist_list_c = dist_list.copy()
             print("mark:",data)
+            lock.release()
             latch = True
             x = 0
             iterator = 0
             
             
             if first == True:
-                with open(path+file,'w') as f:
+                name_append = datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
+                with open(path+file+ name_append +'.csv','w') as f:
                     writer = csv.writer(f)
                     size_mid_copy = size_mid.copy()
                     size_mid_copy.insert(0,0)
                     writer.writerow( size_mid_copy )
                     
-                    for z in range(len ( dist_list )):
-                        row = dist_list[z]                        
+                    for z in range(len ( dist_list_c )):
+                        row = dist_list_c[z]                        
                         writer.writerow(row)
                         
             if first == False:
                 with open(path+file,'a') as f:
                     writer = csv.writer(f)
-                    for z in range(len ( dist_list )):
-                        row = dist_list[z]                        
+                    for z in range(len ( dist_list_c )):
+                        row = dist_list_c[z]                        
                         writer.writerow(row)
 
 
@@ -308,7 +332,7 @@ def report_data_list():
             first = False
             if shutdown == True:
                 operation = False
-            lock.release()
+#             lock.release()
             
         if iterator != 10 and latch == True:
             latch = False
@@ -320,14 +344,25 @@ def report_data_list():
 def timer():
     global operation
     global switch
+    global pause
     
     start_time = datetime.datetime.now()
 #     print(start_time)
 
     while operation == True:
+        
+        if pause == True and GPIO.input(KEY3_PIN) == 0:
+            pause = False
+            time.sleep(0.5)
+
         if( datetime.datetime.now() - start_time ).seconds == 1:
             start_time = datetime.datetime.now()
-            switch = True
+            if pause == False:
+                switch = True
+            
+
+
+        
 #             print(start_time)
     
     return 0
