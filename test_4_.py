@@ -5,6 +5,7 @@ import datetime
 import numpy as np
 import time
 import csv
+import os
 data = []
 data_np = []
 iterator = 0
@@ -18,8 +19,8 @@ current_time =[]
 pause = False
 
 
-
-path = "/home/pi/Documents/PYPM2022/testdata/"
+path = "/media/pi/GAME DEV/Data/"
+# path = "/home/pi/Documents/PYPM2022/testdata/"
 file = "Start_"
 test = 0
 
@@ -321,7 +322,7 @@ def report_data_list():
                         writer.writerow(row)
                         
             if first == False:
-                with open(path+file,'a') as f:
+                with open(path+file+ name_append+'.csv','a') as f:
                     writer = csv.writer(f)
                     for z in range(len ( dist_list_c )):
                         row = dist_list_c[z]                        
@@ -367,6 +368,14 @@ def timer():
     
     return 0
 
+def shutdown():
+    global operation
+    
+    if operation == False:
+        
+        os.system('shutdown now -h')
+    
+    return 0
 
 
 # thread_3 = Thread(target=append_data)

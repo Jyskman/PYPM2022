@@ -498,6 +498,50 @@ static PyObject *OPC_return_bounds(PyObject *self, PyObject *args) {
   //~ return PyLong_FromLong(21463L);
 //~ }
 
+static PyObject *returnPM(PyObject *self, PyObject *args) {
+
+    PyObject * pf = NULL;
+        
+    if(!PyArg_UnpackTuple(args, "iss", 1, 1, &pf)) return NULL;
+
+    OPC * local = (OPC*)PyCapsule_GetPointer(pf, "opcptr") ;
+
+    float pm1 = local->OPC_struct_histogram.pm1;
+    float pm2_5 = local->OPC_struct_histogram.pm2_5;
+    float pm10 = local->OPC_struct_histogram.pm10;
+
+    //~ local->OPC_read_histogram();
+    
+    float pm[3];
+
+    pm[0] = pm1;
+    pm[1] = pm2_5;
+    pm[2] = pm10; 
+
+
+
+    npy_intp dims[1];
+    npy_intp a = 3;
+    dims[0] = a;
+
+
+    //~ PyObject * ret = PyArray_SimpleNewFromData(1,dims,NPY_FLOAT,arr);
+    //~ PyObject * ret = PyArray_SimpleNewFromData(1,dims,NPY_INT32,&arr_e);
+    PyObject * ret = PyArray_Zeros(1,dims,PyArray_DescrFromType(NPY_FLOAT),0);
+
+    for ( int i = 0; i < 3; i++ ) {
+
+        npy_intp ad = i; // position for returened pointer
+        float * data = (float*)PyArray_GetPtr((PyArrayObject*)ret,&ad);
+        *data = pm[i];
+    };
+
+    return ret;
+
+
+};
+
+
 //-----------------------------------------------------------------------------
 static PyMethodDef pypm_methods[] = {
   {
@@ -581,7 +625,13 @@ static PyMethodDef pypm_methods[] = {
     METH_VARARGS,
     "ISS"
   },  
-  
+
+    {
+    "returnPM",
+    returnPM,
+    METH_VARARGS,
+    "ISS"
+  },    
   {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 
