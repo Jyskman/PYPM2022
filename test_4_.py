@@ -17,12 +17,38 @@ switch = False
 dist_list = []
 current_time =[]
 pause = False
-
+from google.cloud import storage
 
 path = "/media/pi/GAME DEV/Data/"
 # path = "/home/pi/Documents/PYPM2022/testdata/"
 file = "Start_"
 test = 0
+
+def GCS():
+    client = storage.Client.from_service_account_json('/home/pi/Documents/key.json')
+
+    # buck = client.list_buckets()
+    name = 'aerosol'
+    bucket = client.bucket(name)
+
+    dagens = datetime.datetime.now().strftime('%Y-%m-%d')
+    folder = 'Data' + '/' + dagens
+    path = '/media/pi/GAME DEV/Data/'
+
+    local = [f for f in os.listdir(path) if os.path.isfile( os.path.join(path,f) ) ]
+
+    remote = [ blob.name for blob in bucket.list_blobs(prefix = folder ) ]
+    remote_base = { os.path.basename( blob_name) for blob_name in remote  }
+
+
+    diff = set(local) - set(remote_base)
+
+
+    for file in diff:
+        
+        blob = bucket.blob( folder + '/' + file )
+        blob.upload_from_filename(path+file)
+# end GCS
 
 
 def LCD_animate(LCD, draw, image, a):
@@ -76,7 +102,7 @@ def LCD_animate(LCD, draw, image, a):
                         y_state = len(y_range) -1
     #                 y_max = 40
                 if GPIO.input(KEY3_PIN) == 0 & latch == False:
-                    latch = True
+#                     latch = True
                     pause = True
 #                     draw.text( (64,(64)),"PAUSE", fill = "RED",font=font )
 #                     LCD.LCD_ShowImage(image,0,0)
@@ -94,6 +120,8 @@ def LCD_animate(LCD, draw, image, a):
                         x_state = 3
                 if GPIO.input(KEY1_PIN) == 1 & latch == False:
                     shutdown = True
+
+                    
                 if GPIO.input(KEY2_PIN) == 1 & latch == False:
                     first = True
                     iterator = 10
@@ -112,6 +140,12 @@ def LCD_animate(LCD, draw, image, a):
                 dist_copy = dist.copy()
                 dist_copy = dist_copy.tolist()
                 dist_copy.insert(0, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') )
+#                 append pm
+                pm_values = p.returnPM(a)
+                pm_values_list = pm_values.tolist()
+                dist_copy.append(-1)
+                dist_copy.extend(pm_values_list)
+                
                 dist_list = []
                 dist_list.append(dist_copy)
                 
@@ -122,6 +156,12 @@ def LCD_animate(LCD, draw, image, a):
                 dist_copy = dist.copy()
                 dist_copy = dist_copy.tolist()
                 dist_copy.insert(0, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') )
+#                 append pm
+                pm_values = p.returnPM(a)
+                pm_values_list = pm_values.tolist()
+                dist_copy.append(-1)
+                dist_copy.extend(pm_values_list)
+
                 dist_list.append(dist_copy)
                 
             lock.release()
@@ -215,6 +255,7 @@ def LCD_animate(LCD, draw, image, a):
             
             if pause == True:
                 draw.text( (64,(64)),"PAUSE", fill = "RED",font=font )
+                draw.text( (80,(25)),"GCS ->", fill = "RED",font=font )
 
             LCD.LCD_ShowImage(image,0,0)
     print('Collect clear')
@@ -227,7 +268,7 @@ def LCD_animate(LCD, draw, image, a):
 
 
 
-
+# old
 def report_data():
     
     global iterator
@@ -315,6 +356,12 @@ def report_data_list():
                     writer = csv.writer(f)
                     size_mid_copy = size_mid.copy()
                     size_mid_copy.insert(0,0)
+#                     appending pm
+                    size_mid_copy.append(-1)
+                    size_mid_copy.append(1)
+                    size_mid_copy.append(2.5)
+                    size_mid_copy.append(10)
+                    
                     writer.writerow( size_mid_copy )
                     
                     for z in range(len ( dist_list_c )):
@@ -355,6 +402,15 @@ def timer():
         if pause == True and GPIO.input(KEY3_PIN) == 0:
             pause = False
             time.sleep(0.5)
+        if pause == True and GPIO.input(KEY1_PIN) == 0:
+            
+            print('start GCS')
+            GCS()
+#             exec(open('/home/pi/Documents/gcs_upload.py').read())
+            print('Complete GCS')
+            pause = False
+            time.sleep(0.5)
+            start_time = datetime.datetime.now()
 
         if( datetime.datetime.now() - start_time ).seconds == 1:
             start_time = datetime.datetime.now()
