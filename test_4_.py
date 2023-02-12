@@ -169,6 +169,7 @@ def LCD_animate(LCD, draw, image, a):
             draw.rectangle([(0,0),(128,128)],fill = "WHITE")
             
             font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeSans.ttf", size =12)
+            font_2 = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeSans.ttf", size =10)
             
             if x_state == 0:
                 x_max = 24
@@ -251,9 +252,13 @@ def LCD_animate(LCD, draw, image, a):
                     y_val = dist[x] / (0.01*y_max)
                     draw.line([((x_correction+x+x_base+x*x_max_factor),(128)-y_base),((x_correction+x+x_base)+x*x_max_factor,(128-y_val)-y_base)], fill = "BLUE",width = 1)
                     draw.line([((x_correction+x+x_base+x*x_max_factor+1),(128)-y_base),((x_correction+x+x_base)+x*x_max_factor+1,(128-y_val)-y_base)], fill = "BLUE",width = 1*bar_factor)
+            pm2_5 = '{:.1f}'.format(pm_values[1])
+            pm10 = '{:.1f}'.format(pm_values[2])
             
-            
+            draw.text( (35,(25)),'PM2.5: ' + pm2_5 + ' ug/m3', fill = "RED",font=font_2 )
+            draw.text( (35,(35)),'PM10: ' + pm10 + ' ug/m3', fill = "RED",font=font_2 )
             if pause == True:
+                draw.rectangle([(0,0),(128,128)],fill = "WHITE")
                 draw.text( (64,(64)),"PAUSE", fill = "RED",font=font )
                 draw.text( (80,(25)),"GCS ->", fill = "RED",font=font )
 
